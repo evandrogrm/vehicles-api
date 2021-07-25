@@ -10,6 +10,8 @@ services:
       - DATABASE_PASSWORD=user123
       - DATABASE_URL=jdbc:mysql://vehicles-dbserver:3306/vehicles-database?useSSL=false&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true
       - DATABASE_DRIVER=com.mysql.cj.jdbc.Driver
+      - TOKEN_SECRET=db284ee043170e4406e99fc6ca083976
+      - TOKEN_MINUTES_EXPIRATION=30
     networks:
       - application
     expose:

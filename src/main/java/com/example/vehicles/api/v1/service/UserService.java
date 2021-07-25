@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -60,5 +61,10 @@ public class UserService {
         User user = repository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
         repository.deleteById(id);
+    }
+
+    @Transactional(value = Transactional.TxType.NOT_SUPPORTED)
+    public Optional<User> findByEmail(String email) {
+        return Optional.ofNullable(repository.findByEmail(email));
     }
 }
