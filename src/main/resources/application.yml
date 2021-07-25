@@ -1,0 +1,37 @@
+#server:
+#  port: 8080
+#
+#info:
+#  component: demo
+#  name: demo
+#
+#spring:
+#  application:
+#    name: demo
+#  datasource:
+#    url: ${DATABASE_URL:jdbc:mysql://0.0.0.0:3306/vehicles-database?useSSL=false&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true}
+#    username: ${DATABASE_USER:root}
+#    password: ${DATABASE_PASSWORD:user123}
+#    driverClassName: ${DATABASE_DRIVER:com.mysql.cj.jdbc.Driver}
+#    tomcat:
+#      max-active: 10
+#    dbcp2:
+#      test-while-idle: true
+#      validationQuery: SELECT 1
+#  jpa:
+#    show-sql: true
+#    hibernate:
+#      naming:
+#        strategy: org.hibernate.cfg.ImprovedNamingStrategy
+#    properties:
+#      hibernate:
+#        shared-cache-mode: ENABLE_SELECTIVE
+#        dialect: org.hibernate.dialect.MySQL5Dialect
+#  flyway:
+#    enabled: false
+#    baselineOnMigrate: true
+#    validateOnMigrate: false
+#    url: ${DATABASE_URL:jdbc:mysql://0.0.0.0:3306/vehicles-database?useSSL=false&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true}
+#    schemas: vehicles-database
+#    user: ${DATABASE_USER:root}
+#    password: ${DATABASE_PASSWORD:user123}

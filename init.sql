@@ -1,0 +1,3 @@
+CREATE DATABASE IF NOT EXISTS `vehicles-database` CHARACTER SET utf8 COLLATE utf8_general_ci;
+GRANT ALL PRIVILEGES ON *.* TO 'user'@'%';
+FLUSH PRIVILEGES;

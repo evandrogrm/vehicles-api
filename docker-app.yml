@@ -1,0 +1,18 @@
+version: "3"
+services:
+  vehicles-api:
+    image: application/vehicles
+    ports:
+      - 8080:8080
+      - 8081:8081
+    environment:
+      - DATABASE_USER=user
+      - DATABASE_PASSWORD=user123
+      - DATABASE_URL=jdbc:mysql://vehicles-dbserver:3306/vehicles-database?useSSL=false&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true
+      - DATABASE_DRIVER=com.mysql.cj.jdbc.Driver
+    networks:
+      - application
+    expose:
+      - 8081
+networks:
+  application:
