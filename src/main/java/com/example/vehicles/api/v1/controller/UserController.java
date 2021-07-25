@@ -17,6 +17,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 import static com.example.vehicles.api.VersionPath.PATH_V1;
 
 @RestController("UserControllerV1")
@@ -34,7 +36,7 @@ public class UserController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserResponseDTO> create(
             @ApiParam(value = "User details", required = true)
-            @RequestBody UserRequestDTO requestDTO) throws AbstractException {
+            @Valid @RequestBody UserRequestDTO requestDTO) throws AbstractException {
         UserVO requestVO = mapper.map(requestDTO, UserVO.class);
         UserVO responseVO = service.create(requestVO);
         UserResponseDTO responseDTO = mapper.map(responseVO, UserResponseDTO.class);

@@ -60,7 +60,7 @@ public class UserService {
     public void deleteById(String id) throws AbstractException {
         User user = repository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
-        repository.deleteById(id);
+        repository.delete(user);
     }
 
     @Transactional(value = Transactional.TxType.NOT_SUPPORTED)

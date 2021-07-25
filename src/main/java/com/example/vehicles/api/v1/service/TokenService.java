@@ -1,9 +1,8 @@
 package com.example.vehicles.api.v1.service;
 
+import com.example.vehicles.config.exception.ForbiddenException;
 import com.example.vehicles.domain.User;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -56,10 +55,14 @@ public class TokenService {
                 .compact();
     }
 
-    public Claims decodeToken(String token) {
-        return Jwts.parser()
-                .setSigningKey(key)
-                .parseClaimsJws(token)
-                .getBody();
+    public Claims decodeToken(String token) throws ForbiddenException {
+        try {
+            return Jwts.parser()
+                    .setSigningKey(key)
+                    .parseClaimsJws(token)
+                    .getBody();
+        } catch (ExpiredJwtException | UnsupportedJwtException | MalformedJwtException | SignatureException | IllegalArgumentException ex) {
+            throw new ForbiddenException("Incorrect token exception");
+        }
     }
 }

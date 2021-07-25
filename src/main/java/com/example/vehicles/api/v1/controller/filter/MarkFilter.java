@@ -1,6 +1,6 @@
 package com.example.vehicles.api.v1.controller.filter;
 
-import com.example.vehicles.domain.User;
+import com.example.vehicles.domain.Mark;
 import net.kaczmarzyk.spring.data.jpa.domain.DateBetween;
 import net.kaczmarzyk.spring.data.jpa.domain.Equal;
 import net.kaczmarzyk.spring.data.jpa.domain.LikeIgnoreCase;
@@ -11,7 +11,6 @@ import org.springframework.data.jpa.domain.Specification;
 @And({
         @Spec(path = "id", spec = Equal.class),
         @Spec(path = "name", spec = LikeIgnoreCase.class),
-        @Spec(path = "email", spec = LikeIgnoreCase.class),
         @Spec(
                 path = "createdAt",
                 params = {"createdAtFrom", "createdAtTo"},
@@ -25,5 +24,5 @@ import org.springframework.data.jpa.domain.Specification;
                 config = {"yyyy-MM-dd hh:mm:ss"}
         ),
 })
-public interface UserFilter extends Specification<User> {
+public interface MarkFilter extends Specification<Mark> {
 }

@@ -3,7 +3,6 @@ package com.example.vehicles.api.v1.controller;
 import com.example.vehicles.api.v1.dto.LoginRequestDTO;
 import com.example.vehicles.api.v1.dto.LoginResponseDTO;
 import com.example.vehicles.api.v1.service.LoginService;
-import com.example.vehicles.api.v1.service.exception.AbstractException;
 import com.example.vehicles.api.v1.service.vo.LoginVO;
 import com.example.vehicles.mapper.LoginMapper;
 import io.swagger.annotations.ApiOperation;
@@ -15,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 import static com.example.vehicles.api.VersionPath.PATH_V1;
 
@@ -32,7 +33,7 @@ public class LoginController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<LoginResponseDTO> login(
             @ApiParam(value = "User login details", required = true)
-            @RequestBody LoginRequestDTO requestDTO) throws AbstractException {
+            @Valid @RequestBody LoginRequestDTO requestDTO) {
         LoginVO loginVO = service.login(requestDTO);
         return ResponseEntity.ok(mapper.map(loginVO, LoginResponseDTO.class));
     }

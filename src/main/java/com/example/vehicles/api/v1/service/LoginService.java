@@ -26,7 +26,6 @@ public class LoginService {
 
     @Transactional(value = Transactional.TxType.NOT_SUPPORTED)
     public LoginVO login(LoginRequestDTO requestDTO) {
-        //TODO: usar pattern matcher Os dois campos precisam estar preenchidos com no mínimo 3 caracteres, sendo que o email indicado deve ter um formato válido;
         Optional<User> optionalUser = Optional.ofNullable(userRepositoryV1.findByEmail(requestDTO.getEmail()));
 
         if (!optionalUser.isPresent()) {
