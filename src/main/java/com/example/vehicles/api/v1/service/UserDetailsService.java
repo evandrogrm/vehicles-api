@@ -25,7 +25,6 @@ public class UserDetailsService implements org.springframework.security.core.use
     @Override
     public UserDetails loadUserByUsername(final String email) {
         try {
-            System.out.println("Authenticating " + email);
             String lowercaseEmail = email.toLowerCase();
             User user = userService.findByEmail(lowercaseEmail)
                     .orElseThrow(() -> new UserEmailNotFoundException(email));
