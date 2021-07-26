@@ -36,23 +36,21 @@ public class RentService {
     private RentMapper mapper;
 
     @Autowired
-    private VehicleRepositoryV1 vehicleRepositoryV1;
+    private VehicleService vehicleService;
 
     @Autowired
-    private UserRepositoryV1 userRepositoryV1;
+    private UserService userService;
 
     @Value("${MAXIMUM_DAYS_DIFFERENCE:30}")
     private int maximumDaysDifference = 30;
 
     @Transactional(value = Transactional.TxType.REQUIRED, rollbackOn = Exception.class)
     public RentVO rent(RentRequestDTO requestDTO) throws AbstractException {
-        Vehicle vehicle = vehicleRepositoryV1.findById(requestDTO.getVehicleId())
-                .orElseThrow(() -> new VehicleNotFoundException(requestDTO.getVehicleId()));
+        Vehicle vehicle = vehicleService.findEntityById(requestDTO.getVehicleId());
 
         User user;
         if (requestDTO.getUserId() != null) {
-            user = userRepositoryV1.findById(requestDTO.getUserId())
-                    .orElseThrow(() -> new UserNotFoundException(requestDTO.getUserId()));
+            user = userService.findEntityById(requestDTO.getUserId());
         } else {
             user = getLoggedUser();
         }
@@ -118,12 +116,17 @@ public class RentService {
     }
 
     @Transactional(value = Transactional.TxType.NOT_SUPPORTED)
-    public Page<RentVO> search(RentFilter rentFilter, Pageable pageable) {
+    public Page<RentVO> search(RentFilter rentFilter, Pageable pageable) throws AbstractException {
         Page<Rent> rents = repository.findAll(rentFilter, pageable);
         rents.map(rent -> {
-            rent.setVehicle(vehicleRepositoryV1.findById(rent.getVehicleId()).get());
-            rent.setUser(userRepositoryV1.findById(rent.getUserId()).get());
-            return rent;
+            try {
+                rent.setVehicle(vehicleService.findEntityById(rent.getVehicleId()));
+                rent.setUser(userService.findEntityById(rent.getUserId()));
+                return rent;
+            } catch (AbstractException e) {
+                e.printStackTrace();
+                return null;
+            }
         });
         return mapper.toRentResponseVOPage(rents);
     }
@@ -133,8 +136,8 @@ public class RentService {
         Rent rent = repository.findById(id)
                 .orElseThrow(() -> new RentNotFoundException(id));
 
-        rent.setVehicle(vehicleRepositoryV1.findById(rent.getVehicleId()).get());
-        rent.setUser(userRepositoryV1.findById(rent.getUserId()).get());
+        rent.setVehicle(vehicleService.findEntityById(rent.getVehicleId()));
+        rent.setUser(userService.findEntityById(rent.getUserId()));
 
         return mapper.toRentVO(rent);
     }

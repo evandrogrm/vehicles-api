@@ -42,6 +42,15 @@ public class MarkService {
         return mapper.map(mark, MarkVO.class);
     }
 
+    @Transactional(value = Transactional.TxType.REQUIRED, rollbackOn = Exception.class)
+    public MarkVO update(MarkVO requestVO) throws AbstractException {
+        Mark mark = findEntityById(requestVO.getId())
+                .setName(requestVO.getName());
+
+        mark = repository.save(mark);
+
+        return mapper.map(mark, MarkVO.class);
+    }
 
     @Transactional(value = Transactional.TxType.NOT_SUPPORTED)
     public Page<MarkVO> search(MarkFilter markFilter, Pageable pageable) {
@@ -51,9 +60,15 @@ public class MarkService {
 
     @Transactional(value = Transactional.TxType.NOT_SUPPORTED)
     public MarkVO findById(String id) throws AbstractException {
+        Mark mark = findEntityById(id);
+        return mapper.map(mark, MarkVO.class);
+    }
+
+    @Transactional(value = Transactional.TxType.NOT_SUPPORTED)
+    private Mark findEntityById(String id) throws AbstractException {
         Mark mark = repository.findById(id)
                 .orElseThrow(() -> new MarkNotFoundException(id));
-        return mapper.map(mark, MarkVO.class);
+        return mark;
     }
 
     @Transactional(value = Transactional.TxType.REQUIRED, rollbackOn = Exception.class)

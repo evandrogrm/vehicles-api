@@ -3,6 +3,7 @@ package com.example.vehicles.api.v1.controller;
 import com.example.vehicles.api.v1.controller.filter.UserFilter;
 import com.example.vehicles.api.v1.dto.UserRequestDTO;
 import com.example.vehicles.api.v1.dto.UserResponseDTO;
+import com.example.vehicles.api.v1.dto.UserUpdateRequestDTO;
 import com.example.vehicles.api.v1.service.UserService;
 import com.example.vehicles.api.v1.service.exception.AbstractException;
 import com.example.vehicles.api.v1.service.vo.UserVO;
@@ -39,6 +40,17 @@ public class UserController {
             @Valid @RequestBody UserRequestDTO requestDTO) throws AbstractException {
         UserVO requestVO = mapper.map(requestDTO, UserVO.class);
         UserVO responseVO = service.create(requestVO);
+        UserResponseDTO responseDTO = mapper.map(responseVO, UserResponseDTO.class);
+        return ResponseEntity.ok(responseDTO);
+    }
+
+    @ApiOperation("Updates an user")
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<UserResponseDTO> update(
+            @ApiParam(value = "User details", required = true)
+            @Valid @RequestBody UserUpdateRequestDTO requestDTO) throws AbstractException {
+        UserVO requestVO = mapper.map(requestDTO, UserVO.class);
+        UserVO responseVO = service.update(requestVO);
         UserResponseDTO responseDTO = mapper.map(responseVO, UserResponseDTO.class);
         return ResponseEntity.ok(responseDTO);
     }

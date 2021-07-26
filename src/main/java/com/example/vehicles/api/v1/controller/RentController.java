@@ -44,7 +44,7 @@ public class RentController {
 
     @ApiOperation("Search rents")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Page<RentResponseDTO>> find(RentFilter rentFilter, Pageable pageable) {
+    public ResponseEntity<Page<RentResponseDTO>> find(RentFilter rentFilter, Pageable pageable) throws AbstractException {
         Page<RentVO> responseVO = service.search(rentFilter, pageable);
         return ResponseEntity.ok(mapper.toRentsResponseDTOPage(responseVO));
     }

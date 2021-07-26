@@ -46,6 +46,24 @@ public class VehicleService {
         return mapper.toVehicleVO(vehicle);
     }
 
+    @Transactional(value = Transactional.TxType.REQUIRED, rollbackOn = Exception.class)
+    public VehicleVO update(VehicleVO requestVO) throws AbstractException {
+        Mark mark = markService.getOrCreateByName(requestVO.getMarkName());
+
+        Vehicle vehicle = findEntityById(requestVO.getId())
+                .setMarkId(mark.getId())
+                .setMark(mark)
+                .setModel(requestVO.getModel())
+                .setFabricationYear(requestVO.getFabricationYear())
+                .setImage(requestVO.getImage())
+                .setColor(requestVO.getColor())
+                .setMileage(requestVO.getMileage());
+
+        vehicle = repository.save(vehicle);
+
+        return mapper.toVehicleVO(vehicle);
+    }
+
     @Transactional(value = Transactional.TxType.NOT_SUPPORTED)
     public Page<VehicleVO> search(VehicleFilter vehicleFilter, Pageable pageable) {
         Page<Vehicle> vehicles = repository.findAll(vehicleFilter, pageable);
@@ -55,12 +73,18 @@ public class VehicleService {
 
     @Transactional(value = Transactional.TxType.NOT_SUPPORTED)
     public VehicleVO findById(String id) throws AbstractException {
+        Vehicle vehicle = findEntityById(id);
+        return mapper.map(vehicle, VehicleVO.class);
+    }
+
+    @Transactional(value = Transactional.TxType.NOT_SUPPORTED)
+    public Vehicle findEntityById(String id) throws AbstractException {
         Vehicle vehicle = repository.findById(id)
                 .orElseThrow(() -> new VehicleNotFoundException(id));
 
         vehicle.setMark(markRepositoryV1.findById(vehicle.getMarkId()).get());
 
-        return mapper.map(vehicle, VehicleVO.class);
+        return vehicle;
     }
 
     @Transactional(value = Transactional.TxType.REQUIRED, rollbackOn = Exception.class)

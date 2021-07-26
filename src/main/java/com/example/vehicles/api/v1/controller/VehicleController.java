@@ -3,6 +3,7 @@ package com.example.vehicles.api.v1.controller;
 import com.example.vehicles.api.v1.controller.filter.VehicleFilter;
 import com.example.vehicles.api.v1.dto.VehicleRequestDTO;
 import com.example.vehicles.api.v1.dto.VehicleResponseDTO;
+import com.example.vehicles.api.v1.dto.VehicleUpdateRequestDTO;
 import com.example.vehicles.api.v1.service.VehicleService;
 import com.example.vehicles.api.v1.service.exception.AbstractException;
 import com.example.vehicles.api.v1.service.vo.VehicleVO;
@@ -39,6 +40,17 @@ public class VehicleController {
             @Valid @RequestBody VehicleRequestDTO requestDTO) throws AbstractException {
         VehicleVO requestVO = mapper.map(requestDTO, VehicleVO.class);
         VehicleVO responseVO = service.create(requestVO);
+        VehicleResponseDTO responseDTO = mapper.toVehicleResponseDTO(responseVO);
+        return ResponseEntity.ok(responseDTO);
+    }
+
+    @ApiOperation("Updates a vehicle")
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<VehicleResponseDTO> update(
+            @ApiParam(value = "Vehicle details", required = true)
+            @Valid @RequestBody VehicleUpdateRequestDTO requestDTO) throws AbstractException {
+        VehicleVO requestVO = mapper.map(requestDTO, VehicleVO.class);
+        VehicleVO responseVO = service.update(requestVO);
         VehicleResponseDTO responseDTO = mapper.toVehicleResponseDTO(responseVO);
         return ResponseEntity.ok(responseDTO);
     }

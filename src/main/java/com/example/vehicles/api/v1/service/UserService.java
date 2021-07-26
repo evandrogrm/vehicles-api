@@ -43,6 +43,17 @@ public class UserService {
         return mapper.map(user, UserVO.class);
     }
 
+    @Transactional(value = Transactional.TxType.REQUIRED, rollbackOn = Exception.class)
+    public UserVO update(UserVO requestVO) throws AbstractException {
+        User user = findEntityById(requestVO.getId())
+                .setName(requestVO.getName())
+                .setEmail(requestVO.getEmail());
+
+        user = repository.save(user);
+
+        return mapper.map(user, UserVO.class);
+    }
+
     @Transactional(value = Transactional.TxType.NOT_SUPPORTED)
     public Page<UserVO> search(UserFilter userFilter, Pageable pageable) {
         Page<User> users = repository.findAll(userFilter, pageable);
@@ -51,9 +62,15 @@ public class UserService {
 
     @Transactional(value = Transactional.TxType.NOT_SUPPORTED)
     public UserVO findById(String id) throws AbstractException {
+        User user = findEntityById(id);
+        return mapper.map(user, UserVO.class);
+    }
+
+    @Transactional(value = Transactional.TxType.NOT_SUPPORTED)
+    public User findEntityById(String id) throws AbstractException {
         User user = repository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
-        return mapper.map(user, UserVO.class);
+        return user;
     }
 
     @Transactional(value = Transactional.TxType.REQUIRED, rollbackOn = Exception.class)

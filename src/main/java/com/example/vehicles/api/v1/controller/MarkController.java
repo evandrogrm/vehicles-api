@@ -1,8 +1,7 @@
 package com.example.vehicles.api.v1.controller;
 
 import com.example.vehicles.api.v1.controller.filter.MarkFilter;
-import com.example.vehicles.api.v1.dto.MarkRequestDTO;
-import com.example.vehicles.api.v1.dto.MarkResponseDTO;
+import com.example.vehicles.api.v1.dto.*;
 import com.example.vehicles.api.v1.dto.MarkRequestDTO;
 import com.example.vehicles.api.v1.dto.MarkResponseDTO;
 import com.example.vehicles.api.v1.service.MarkService;
@@ -44,6 +43,17 @@ public class MarkController {
             @Valid @RequestBody MarkRequestDTO requestDTO) throws AbstractException {
         MarkVO requestVO = mapper.map(requestDTO, MarkVO.class);
         MarkVO responseVO = service.create(requestVO);
+        MarkResponseDTO responseDTO = mapper.map(responseVO, MarkResponseDTO.class);
+        return ResponseEntity.ok(responseDTO);
+    }
+
+    @ApiOperation("Updates a mark")
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<MarkResponseDTO> update(
+            @ApiParam(value = "Mark details", required = true)
+            @Valid @RequestBody MarkUpdateRequestDTO requestDTO) throws AbstractException {
+        MarkVO requestVO = mapper.map(requestDTO, MarkVO.class);
+        MarkVO responseVO = service.update(requestVO);
         MarkResponseDTO responseDTO = mapper.map(responseVO, MarkResponseDTO.class);
         return ResponseEntity.ok(responseDTO);
     }
