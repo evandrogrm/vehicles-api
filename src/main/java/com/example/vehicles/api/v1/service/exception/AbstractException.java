@@ -3,6 +3,9 @@ package com.example.vehicles.api.v1.service.exception;
 import org.springframework.http.HttpStatus;
 
 public abstract class AbstractException extends Exception {
+
+    public static final String SEPARATOR = "-#@#-";
+
     private static final long serialVersionUID = 1L;
     private HttpStatus status;
     private final String message;

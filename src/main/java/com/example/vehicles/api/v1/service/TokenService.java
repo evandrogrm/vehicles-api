@@ -14,6 +14,7 @@ public class TokenService {
     public static String ROLE_USER = "ROLE_USER";
     public static String ROLE_ADMIN = "ROLE_ADMIN";
     public static String ROLES_PROPERTY = "user_roles";
+    public static String USER_ID_PROPERTY = "user_id";
 
     @Value("${TOKEN_SECRET:String Aleatoria Secret}")
     private String key = "String Aleatoria Secret";
@@ -42,7 +43,7 @@ public class TokenService {
 
     public String generateToken(User user, Set<String> userRoles) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("user_id", user.getId());
+        claims.put(USER_ID_PROPERTY, user.getId());
         claims.put("user_name", user.getName());
         claims.put("user_email", user.getEmail());
         claims.put(ROLES_PROPERTY, userRoles);

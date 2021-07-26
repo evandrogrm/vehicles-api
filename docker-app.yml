@@ -12,6 +12,7 @@ services:
       - DATABASE_DRIVER=com.mysql.cj.jdbc.Driver
       - TOKEN_SECRET=db284ee043170e4406e99fc6ca083976
       - TOKEN_MINUTES_EXPIRATION=1000
+      - MAXIMUM_DAYS_DIFFERENCE=30
     networks:
       - application
     expose:

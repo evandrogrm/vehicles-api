@@ -5,6 +5,6 @@ import java.util.Arrays;
 public class UserEmailNotFoundException extends NotFoundException {
 
     public UserEmailNotFoundException(String email) {
-        super("user.email.{0};" + Arrays.asList(email), new Object[]{email});
+        super("user.email" + SEPARATOR + Arrays.asList(email), new Object[]{email});
     }
 }

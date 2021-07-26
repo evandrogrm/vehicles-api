@@ -5,6 +5,6 @@ import java.util.Arrays;
 public class MarkWithNameAlreadyExistsException extends BadRequestException {
 
     public MarkWithNameAlreadyExistsException(String name) {
-        super("mark.create.name.exists.{0};" + Arrays.asList(name), new Object[]{name});
+        super("mark.create.name.exists" + SEPARATOR + Arrays.asList(name), new Object[]{name});
     }
 }

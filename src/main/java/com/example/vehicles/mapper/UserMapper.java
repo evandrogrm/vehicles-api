@@ -17,4 +17,12 @@ public final class UserMapper extends Mapper {
     public Page<UserVO> toUserResponseVOPage(Page<User> users) {
         return users.map(u -> map(u, UserVO.class));
     }
+
+    public UserVO toUserVO(User user) {
+        return map(user, UserVO.class);
+    }
+
+    public UserResponseDTO toUserDTO(UserVO user) {
+        return map(user, UserResponseDTO.class);
+    }
 }

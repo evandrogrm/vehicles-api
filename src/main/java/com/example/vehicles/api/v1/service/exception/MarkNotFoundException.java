@@ -5,6 +5,6 @@ import java.util.Arrays;
 public class MarkNotFoundException extends NotFoundException {
 
     public MarkNotFoundException(String id) {
-        super("mark.notFound.{0};" + Arrays.asList(id), new Object[]{id});
+        super("mark.notFound" + SEPARATOR + Arrays.asList(id), new Object[]{id});
     }
 }

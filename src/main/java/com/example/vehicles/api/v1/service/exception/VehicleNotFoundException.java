@@ -5,6 +5,6 @@ import java.util.Arrays;
 public class VehicleNotFoundException extends NotFoundException {
 
     public VehicleNotFoundException(String id) {
-        super("vehicle.notFound.{0};" + Arrays.asList(id), new Object[]{id});
+        super("vehicle.notFound" + SEPARATOR + Arrays.asList(id), new Object[]{id});
     }
 }

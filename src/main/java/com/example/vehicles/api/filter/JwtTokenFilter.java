@@ -57,7 +57,7 @@ public class JwtTokenFilter extends GenericFilterBean {
                     }
 
                     UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                            email, null, userGranted);
+                            email, claims, userGranted);
                     SecurityContextHolder.getContext().setAuthentication(authenticationToken);
                 }
             }

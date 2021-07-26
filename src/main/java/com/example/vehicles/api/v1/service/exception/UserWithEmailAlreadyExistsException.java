@@ -5,6 +5,6 @@ import java.util.Arrays;
 public class UserWithEmailAlreadyExistsException extends BadRequestException {
 
     public UserWithEmailAlreadyExistsException(String email) {
-        super("user.create.email.exists.{0};" + Arrays.asList(email), new Object[]{email});
+        super("user.create.email.exists" + SEPARATOR + Arrays.asList(email), new Object[]{email});
     }
 }
