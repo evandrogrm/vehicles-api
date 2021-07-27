@@ -45,7 +45,7 @@ public class VehicleController {
     }
 
     @ApiOperation("Updates a vehicle")
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<VehicleResponseDTO> update(
             @ApiParam(value = "Vehicle details", required = true)
             @Valid @RequestBody VehicleUpdateRequestDTO requestDTO) throws AbstractException {

@@ -66,6 +66,16 @@ public class Mark implements Serializable {
         return this;
     }
 
+    public Mark() {
+    }
+
+    public Mark(String id, String name, Date createdAt, Date updatedAt) {
+        this.id = id;
+        this.name = name;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
     @Override
     public String toString() {
         return "Mark{" +

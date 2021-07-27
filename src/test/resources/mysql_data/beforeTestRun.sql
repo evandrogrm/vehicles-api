@@ -1,7 +1,3 @@
-CREATE DATABASE IF NOT EXISTS `vehicles-database` CHARACTER SET utf8 COLLATE utf8_general_ci;
-GRANT ALL PRIVILEGES ON *.* TO 'user'@'%';
-FLUSH PRIVILEGES;
-
 CREATE TABLE `users` (
   `id` varchar(36) NOT NULL,
   `name` varchar(255) NOT NULL,

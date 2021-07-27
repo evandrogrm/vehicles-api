@@ -7,7 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 @Component
-public final class MarkMapper extends Mapper {
+public class MarkMapper extends Mapper {
     public Page<MarkResponseDTO> toMarksResponseDTOPage(Page<MarkVO> responseVO) {
         return responseVO.map(vo -> map(vo, MarkResponseDTO.class));
     }
