@@ -23,7 +23,7 @@ This will create an image called _application/vehicles_
 
 This step will turn it up the image we just created
 
-#Contacts
+# Contacts
 
 If anyone has any questions or adjustments can contact me on:
 
