@@ -26,16 +26,18 @@ public class LoginRequestDTO {
         return name;
     }
 
-    public void setName(String name) {
+    public LoginRequestDTO setName(String name) {
         this.name = name;
+        return this;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public LoginRequestDTO setEmail(String email) {
         this.email = email;
+        return this;
     }
 
     @Override
