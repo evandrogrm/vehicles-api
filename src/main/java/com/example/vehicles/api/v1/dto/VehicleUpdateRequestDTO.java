@@ -30,7 +30,7 @@ public class VehicleUpdateRequestDTO {
     private Integer fabricationYear;
 
     @ApiModelProperty("Vehicle image")
-    private byte[] image;
+    private String image;
 
     @ApiModelProperty("Vehicle color")
     private String color;
@@ -74,11 +74,11 @@ public class VehicleUpdateRequestDTO {
         return this;
     }
 
-    public byte[] getImage() {
+    public String getImage() {
         return image;
     }
 
-    public VehicleUpdateRequestDTO setImage(byte[] image) {
+    public VehicleUpdateRequestDTO setImage(String image) {
         this.image = image;
         return this;
     }
@@ -108,7 +108,7 @@ public class VehicleUpdateRequestDTO {
                 ", markName='" + markName + '\'' +
                 ", model='" + model + '\'' +
                 ", fabricationYear=" + fabricationYear +
-                ", image=" + Arrays.toString(image) +
+                ", image='" + image + '\'' +
                 ", color='" + color + '\'' +
                 ", mileage=" + mileage +
                 '}';

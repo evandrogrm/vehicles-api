@@ -21,7 +21,7 @@ public class VehicleResponseDTO {
     private Integer fabricationYear;
 
     @ApiModelProperty("Vehicle image")
-    private byte[] image;
+    private String image;
 
     @ApiModelProperty("Vehicle color")
     private String color;
@@ -65,11 +65,11 @@ public class VehicleResponseDTO {
         return this;
     }
 
-    public byte[] getImage() {
+    public String getImage() {
         return image;
     }
 
-    public VehicleResponseDTO setImage(byte[] image) {
+    public VehicleResponseDTO setImage(String image) {
         this.image = image;
         return this;
     }
@@ -99,7 +99,7 @@ public class VehicleResponseDTO {
                 ", mark=" + mark +
                 ", model='" + model + '\'' +
                 ", fabricationYear=" + fabricationYear +
-                ", image=" + Arrays.toString(image) +
+                ", image='" + image + '\'' +
                 ", color='" + color + '\'' +
                 ", mileage=" + mileage +
                 '}';

@@ -53,6 +53,37 @@ public class RentControllerIT extends BaseControllerV1IT {
     }
 
     @Test
+    public void shouldRentVehicleForOtherUserProperly() {
+        //Given
+        DateTime startDT = new DateTime(2021, 9, 1, 0, 0); //DateTime(year, month, day, hour, minute, second)
+        Date start = startDT.toDate();
+
+        DateTime endDT = new DateTime(2021, 9, 2, 0, 0);
+        Date end = endDT.toDate();
+
+        RentRequestDTO inputDTO = new RentRequestDTO()
+                .setVehicleId("2de3c69e-dc5d-4404-9c37-7e2dbe20f381")
+                .setUserId("0cee6037-1d9f-435a-9e6b-ff0e90b90b16")
+                .setRentStartAt(start)
+                .setRentEndAt(end);
+
+        //When
+        Response response = whenUser()
+                .body(inputDTO)
+                .post(RESOURCE);
+
+        //Then
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK.value());
+
+        RentResponseDTO responseDTO = (RentResponseDTO) getResponseDTO(response, RentResponseDTO.class);
+        assertThat(responseDTO.getId()).isNotBlank();
+        assertThat(responseDTO.getVehicle().getId()).isEqualTo("2de3c69e-dc5d-4404-9c37-7e2dbe20f381");
+        assertThat(responseDTO.getUser().getId()).isEqualTo("0cee6037-1d9f-435a-9e6b-ff0e90b90b16");
+        assertThat(responseDTO.getRentStartAt()).isEqualTo(start);
+        assertThat(responseDTO.getRentEndAt()).isEqualTo(end);
+    }
+
+    @Test
     public void shouldInvalidateStartDateBeforeToday() {
         //Given
         DateTime startDT = new DateTime(2021, 7, 20, 0, 0); //DateTime(year, month, day, hour, minute, second)

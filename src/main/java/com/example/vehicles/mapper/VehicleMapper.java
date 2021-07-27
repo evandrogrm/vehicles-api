@@ -5,6 +5,7 @@ import com.example.vehicles.api.v1.dto.VehicleResponseDTO;
 import com.example.vehicles.api.v1.service.vo.MarkVO;
 import com.example.vehicles.api.v1.service.vo.VehicleVO;
 import com.example.vehicles.domain.Vehicle;
+import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
@@ -20,13 +21,20 @@ public final class VehicleMapper extends Mapper {
     }
 
     public Page<VehicleVO> toVehicleResponseVOPage(Page<Vehicle> vehicles) {
-        return vehicles.map(v -> map(v, VehicleVO.class));
+        return vehicles.map(v -> toVehicleVO(v));
     }
 
     public VehicleVO toVehicleVO(Vehicle vehicle) {
         MarkVO markVO = markMapper.toMarkVO(vehicle.getMark());
-        return map(vehicle, VehicleVO.class)
+        VehicleVO vehicleVO = map(vehicle, VehicleVO.class)
                 .setMark(markVO);
+
+        if (ArrayUtils.isNotEmpty(vehicle.getImage())) {
+            vehicleVO.setImage(new String(vehicle.getImage()));
+        }
+
+        return vehicleVO;
+
     }
 
     public VehicleResponseDTO toVehicleResponseDTO(VehicleVO responseVO) {

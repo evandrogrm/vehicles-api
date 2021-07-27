@@ -9,12 +9,15 @@ import com.example.vehicles.api.v1.service.vo.VehicleVO;
 import com.example.vehicles.domain.Mark;
 import com.example.vehicles.domain.Vehicle;
 import com.example.vehicles.mapper.VehicleMapper;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 @Service
@@ -55,9 +58,12 @@ public class VehicleService {
                 .setMark(mark)
                 .setModel(requestVO.getModel())
                 .setFabricationYear(requestVO.getFabricationYear())
-                .setImage(requestVO.getImage())
                 .setColor(requestVO.getColor())
                 .setMileage(requestVO.getMileage());
+
+        if (StringUtils.isNotEmpty(requestVO.getImage())) {
+            vehicle.setImage(requestVO.getImage().getBytes(StandardCharsets.UTF_8));
+        }
 
         vehicle = repository.save(vehicle);
 
@@ -74,7 +80,7 @@ public class VehicleService {
     @Transactional(value = Transactional.TxType.NOT_SUPPORTED)
     public VehicleVO findById(String id) throws AbstractException {
         Vehicle vehicle = findEntityById(id);
-        return mapper.map(vehicle, VehicleVO.class);
+        return mapper.toVehicleVO(vehicle);
     }
 
     @Transactional(value = Transactional.TxType.NOT_SUPPORTED)

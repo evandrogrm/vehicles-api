@@ -11,7 +11,7 @@ public class VehicleVO {
     private String markName;
     private String model;
     private Integer fabricationYear;
-    private byte[] image;
+    private String image;
     private String color;
     private Integer mileage;
     private Date createdAt;
@@ -71,11 +71,11 @@ public class VehicleVO {
         return this;
     }
 
-    public byte[] getImage() {
+    public String getImage() {
         return image;
     }
 
-    public VehicleVO setImage(byte[] image) {
+    public VehicleVO setImage(String image) {
         this.image = image;
         return this;
     }
@@ -125,7 +125,7 @@ public class VehicleVO {
                 ", markName='" + markName + '\'' +
                 ", model='" + model + '\'' +
                 ", fabricationYear=" + fabricationYear +
-                ", image=" + Arrays.toString(image) +
+                ", image='" + image + '\'' +
                 ", color='" + color + '\'' +
                 ", mileage=" + mileage +
                 ", createdAt=" + createdAt +
