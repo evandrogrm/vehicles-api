@@ -53,7 +53,7 @@ public class LoginControllerIT extends BaseControllerV1IT {
         //Given
         LoginRequestDTO inputDTO = new LoginRequestDTO()
                 .setName("Userr")
-                .setEmail("user3@ciandt.com");
+                .setEmail("user3@domain.com");
 
         //When
         Response response = given()

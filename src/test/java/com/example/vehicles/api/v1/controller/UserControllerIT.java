@@ -71,7 +71,7 @@ public class UserControllerIT extends BaseControllerV1IT {
         //Given
         String createdId = "0cee6037-1d9f-435a-9e6b-ff0e90b90b17";
         String createdName = "user3";
-        String createdEmail = "user3@ciandt.com";
+        String createdEmail = "user3@domain.com";
 
         //When
         Response response = whenUser()
@@ -91,7 +91,7 @@ public class UserControllerIT extends BaseControllerV1IT {
         //Given
         String createdId = "0cee6037-1d9f-435a-9e6b-ff0e90b90b17";
         String createdName = "user3";
-        String createdEmail = "user3@ciandt.com";
+        String createdEmail = "user3@domain.com";
 
         //When
         Response response = whenUser()

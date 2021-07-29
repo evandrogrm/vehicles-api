@@ -40,13 +40,13 @@ CREATE TABLE `rents` (
 );
 
 INSERT INTO users (id, name, email, created_at, updated_at)
-VALUES('0cee6037-1d9f-435a-9e6b-ff0e90b90b15', 'user', 'user@ciandt.com', '2021-07-26 06:32:49', '2021-07-26 06:32:49');
+VALUES('0cee6037-1d9f-435a-9e6b-ff0e90b90b15', 'user', 'user@domain.com', '2021-07-26 06:32:49', '2021-07-26 06:32:49');
 
 INSERT INTO users (id, name, email, created_at, updated_at)
-VALUES('0cee6037-1d9f-435a-9e6b-ff0e90b90b16', 'user2', 'user2@ciandt.com', '2021-07-26 06:32:49', '2021-07-26 06:32:49');
+VALUES('0cee6037-1d9f-435a-9e6b-ff0e90b90b16', 'user2', 'user2@domain.com', '2021-07-26 06:32:49', '2021-07-26 06:32:49');
 
 INSERT INTO users (id, name, email, created_at, updated_at)
-VALUES('0cee6037-1d9f-435a-9e6b-ff0e90b90b17', 'user3', 'user3@ciandt.com', '2021-07-26 06:32:49', '2021-07-26 06:32:49');
+VALUES('0cee6037-1d9f-435a-9e6b-ff0e90b90b17', 'user3', 'user3@domain.com', '2021-07-26 06:32:49', '2021-07-26 06:32:49');
 
 
 INSERT INTO marks (id, name, created_at, updated_at)
